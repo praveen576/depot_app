@@ -10,5 +10,9 @@ class Cart < ActiveRecord::Base
     end
     current_item
   end
+
+  def total_price
+    line_items.inject(0) { |sum, line_item| sum + line_item.total_price }
+  end
 end
 
