@@ -51,6 +51,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+        OrderNotifier.received(@order).deliver
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         format.html { redirect_to store_url, notice: 'Thank you for your order.' }
