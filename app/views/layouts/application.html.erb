@@ -9,25 +9,18 @@
 <body class="<%= controller.controller_name %>">
   
   <div id="banner">
-    <%= image_tag("logo.png") %>
+    <%= link_to image_tag("logo.png"), store_url %>
     <%= @page_title || "Pragmatic Bookshelf" %>
   </div>
   
   <div id="columns">
     
-    <div id="side">
-      
+    <div id="side">      
       <% if @cart %>
         <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
           <%= render @cart %>
         <% end %>
       <% end %>
-      <ul>
-        <li><a href="http://www....">Home</a></li>
-        <li><a href="http://www..../faq">Questions</a></li>
-        <li><a href="http://www..../news">News</a></li>
-        <li><a href="http://www..../contact">Contact</a></li>
-      </ul>
 
       <% if session[:user_id] %>
         <ul>
