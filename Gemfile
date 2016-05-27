@@ -7,7 +7,7 @@ gem 'rails', '3.1.0'
 
 gem 'sqlite3'
 gem 'therubyracer', platforms: :ruby
-
+gem 'will_paginate', '~> 3.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -17,8 +17,8 @@ group :assets do
   gem 'uglifier'
 end
 
-gem 'jquery-rails'
-
+# gem 'jquery-rails'
+gem "jquery-rails", "~> 2.3.0"
 # Use unicorn as the web server
 # gem 'unicorn'
 

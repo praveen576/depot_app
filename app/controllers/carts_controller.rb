@@ -1,6 +1,19 @@
 class CartsController < ApplicationController
+
+  skip_before_filter :authorize, only: [:create, :update, :destroy]
+
   # GET /carts
   # GET /carts.json
+  before_filter :find_current_cart, only: [:show, :edit, :update]
+
+  def find_current_cart
+    @cart = Cart.find_by_id(params[:id])
+    unless @cart
+      logger.error "Attempt to access invalid cart #{params[:id]}"
+      redirect_to store_url, notice: 'Invalid cart'
+    end
+  end
+
   def index
     @carts = Cart.all
 
@@ -13,19 +26,12 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
-    begin
-      @cart = Cart.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      logger.error "Attempt to access invalid cart #{params[:id]}"
-      redirect_to store_url, notice: 'Invalid cart'
-    else
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @cart }
-      end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @cart }
     end
   end
-
+  
   # GET /carts/new
   # GET /carts/new.json
   def new
@@ -39,7 +45,6 @@ class CartsController < ApplicationController
 
   # GET /carts/1/edit
   def edit
-    @cart = Cart.find(params[:id])
   end
 
   # POST /carts
@@ -61,38 +66,19 @@ class CartsController < ApplicationController
   # PUT /carts/1
   # PUT /carts/1.json
   def update
-    @cart = Cart.find(params[:id])
-
-    respond_to do |format|
-      if @cart.update_attributes(params[:cart])
-        format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
+    format.html { render action: "edit" }
+    format.json { render json: @cart.errors, status: :unprocessable_entity }
   end
 
   # DELETE /carts/1
   # DELETE /carts/1.json
-  # def destroy
-  #   @cart = Cart.find(params[:id])
-  #   @cart.destroy
-
-  #   respond_to do |format|
-  #     format.html { redirect_to carts_url }
-  #     format.json { head :ok }
-  #   end
-  # end
 
   def destroy
     @cart = current_cart
     @cart.destroy
     session[:cart_id] = nil
     respond_to do |format|
-      format.html { redirect_to store_url,
-        notice: 'Your cart is currently empty' }
+      format.html { redirect_to store_url }
       format.json { head :ok }
     end
   end
