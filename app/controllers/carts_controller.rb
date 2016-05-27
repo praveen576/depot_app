@@ -1,4 +1,7 @@
 class CartsController < ApplicationController
+
+  skip_before_filter :authorize, only: [:create, :update, :destroy]
+
   # GET /carts
   # GET /carts.json
   before_filter :find_current_cart, only: [:show, :edit, :update]
