@@ -52,5 +52,8 @@ module Depot
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.secret_token = 'ea6ae0e4d0b4c8c5ee0ebe3dbd4b9d3754ae5cd4a743d305478dd1908c0b2d7fd35aedce9e49a9ee7bbba8a52c3313d501c3f05f06db2e88d21dfdf64ec8454d'
+
   end
 end
