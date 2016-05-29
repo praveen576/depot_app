@@ -32,6 +32,8 @@ Depot::Application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
+  Paperclip.options[:command_path] = "/usr/bin/convert"
+
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 

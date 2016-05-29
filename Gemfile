@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'therubyracer', platforms: :ruby
 gem 'will_paginate', '~> 3.0'
 gem 'devise', '2.1.0'
+gem 'paperclip'
 
 # Gems used only for assets and not required
 # in production environments by default.
