@@ -8,14 +8,12 @@ class ProductTest < ActiveSupport::TestCase
     assert product.errors[:title].any?
     assert product.errors[:description].any?
     assert product.errors[:price].any?
-    assert product.errors[:image_url].any?
   end
 
   test "product price must be positive" do
     product = Product.new(title:
     "My Book Title",
     description: "yyy",
-    image_url:
     "zzz.jpg")
     
     product.price = -1
@@ -32,11 +30,10 @@ class ProductTest < ActiveSupport::TestCase
     assert product.valid?
   end
 
-  def new_product(image_url)
+  def new_product
     Product.new(title: "My Book Title",
                 description: "yyy",
-                price: 1,
-                image_url: image_url)
+                price: 1)
   end
 
   test "image url" do
@@ -55,8 +52,7 @@ class ProductTest < ActiveSupport::TestCase
   test "product is not valid without a unique title" do
     product = Product.new(title: products(:ruby).title,
                           description: "yyy",
-                          price: 1,
-                          image_url: "fred.gif")
+                          price: 1)
     assert !product.save
     assert_equal "has already been taken", product.errors[:title].join('; ')
     # Use I18n.translate('activerecord.errors.messages.taken') instead of hard coded string.

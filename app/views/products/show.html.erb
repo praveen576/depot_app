@@ -1,5 +1,6 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
-
+<% end %>
 <p>
   <b>Title:</b>
   <%= @product.title %>
@@ -10,10 +11,7 @@
   <%= @product.description %>
 </p>
 
-<p>
-  <b>Image url:</b>
-  <%= @product.image_url %>
-</p>
+<p> <%= image_tag @product.image.url(:small) %> </p>
 
 <p>
   <b>Price:</b>
