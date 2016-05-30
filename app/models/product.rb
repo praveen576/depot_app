@@ -14,15 +14,22 @@ class Product < ActiveRecord::Base
     path: ":rails_root/public/assets/products/:id/:style/:basename.:extension"
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
-  private
 
+  def add_to_redis
+    $redis.hset('product', "#{self.id}", { id: "#{self.id}", title: "#{self.title}", description: "#{self.description}", price: "#{self.price}", image_url: "#{self.image.url(:small)}" })
+  end
+
+  def remove_from_redis
+    $redis.hdel('product', "#{self.id}")
+  end
+
+  private
   def ensure_not_referenced_by_any_line_item
     if line_items.empty?
       return true
     else
-      errors.add(base: 'Line Items present')
+      errors[:base] << 'Line Items present'
       return false
     end
   end
 end
-
