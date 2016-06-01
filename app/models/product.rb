@@ -22,7 +22,6 @@ class Product < ActiveRecord::Base
   def remove_from_redis
     $redis.hdel('product', "#{self.id}")
   end
-
   private
   def ensure_not_referenced_by_any_line_item
     if line_items.empty?

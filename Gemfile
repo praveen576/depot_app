@@ -11,6 +11,9 @@ gem 'will_paginate', '~> 3.0'
 gem 'devise', '2.1.0'
 gem 'paperclip'
 gem 'redis'
+gem 'sidekiq', '2.17.8'
+gem 'sinatra', require: false
+gem 'slim'
 
 # Gems used only for assets and not required
 # in production environments by default.
