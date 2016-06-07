@@ -52,7 +52,9 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        OrderNotifier.received(@order).deliver
+        # OrderNotifier.received(@order).deliver
+        MailerWorker.perform_async(@order.id)
+
         Cart.destroy(current_cart)
         format.html { redirect_to store_url, notice: 'Thank you for your order.' }
         format.json { render json: @order, status: :created, location: @order }
