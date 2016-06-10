@@ -1,5 +1,7 @@
 Depot::Application.routes.draw do
 
+  resources :categories
+
   require 'sidekiq/web'
 
   mount Sidekiq::Web, at: '/sidekiq'
