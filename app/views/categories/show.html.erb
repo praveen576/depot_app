@@ -1,0 +1,23 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+<p>
+  <b>Name:</b>
+  <%= @category.name %>
+</p>
+<h3> Listing Products of category </h3>
+<table>
+  <tr>
+    <th> <b>Title</b> </th>
+    <th>Actions</th>
+  </tr>
+  <% @category.products.each do |product| %>
+    <tr>
+      <td> <%= render 'product', product: product %> </td>
+      <td> <%= link_to 'Show', product %> </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Edit', edit_category_path(@category) %> | 
+<%= link_to 'Back', categories_path %>

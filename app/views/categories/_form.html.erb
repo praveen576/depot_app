@@ -1,0 +1,32 @@
+<%= nested_form_for(@category) do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <%= f.fields_for :products do |ff| %>
+    <h3>Add product here.. </h3>
+    <div>
+    <%= render 'product_fields', f: ff %>
+    </div>
+    <%= ff.link_to_remove 'Remove Product' %>
+  <% end %>
+
+  <%= f.link_to_add 'Add Product', :products %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

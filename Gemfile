@@ -16,6 +16,7 @@ gem 'sidekiq', '2.17.8'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'yaml_db'
+gem 'nested_form'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
