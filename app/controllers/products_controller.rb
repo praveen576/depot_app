@@ -49,7 +49,6 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        @product.add_to_redis
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
@@ -80,7 +79,6 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])
     if @product.destroy
-      @product.remove_from_redis
       flash[:notice] = 'Product removed successfully'
     else
       flash[:error] = "Failed: #{ @product.errors.full_messages }"
