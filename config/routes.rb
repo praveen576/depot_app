@@ -1,5 +1,10 @@
 Depot::Application.routes.draw do
 
+  resources :products do
+    resources :reviews
+  end
+
+
   resources :categories
 
   require 'sidekiq/web'
@@ -26,7 +31,7 @@ Depot::Application.routes.draw do
 
   get 'store/index'
 
-  resources :products
+  # resources :products
 
   root to: 'store#index', as: 'store'
 

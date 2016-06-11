@@ -18,7 +18,9 @@
   <b>Price:</b>
   <%= @product.price %>
 </p>
-
+<p>
+<%= link_to 'User Reviews', product_reviews_path(@product) %>  
+</p>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
