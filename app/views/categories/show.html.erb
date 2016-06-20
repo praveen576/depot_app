@@ -14,7 +14,7 @@
   <% @category.products.each do |product| %>
     <tr>
       <td>
-      <%= render product %>
+      <%= product.title %>
       </td>
       <td> <%= link_to 'Show', product %> </td>
     </tr>
