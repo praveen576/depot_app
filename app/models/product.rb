@@ -1,5 +1,8 @@
 class Product < ActiveRecord::Base
 
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks 
+
   has_many :line_items
   has_many :orders, through: :line_items
   belongs_to :category
